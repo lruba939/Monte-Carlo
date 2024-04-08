@@ -10,6 +10,6 @@ double uni_rand();
 
 void normal_rand(double& X, double& Y, double mean, double std);
 
-void wiener(int N, double tmax, double dt, double Exy, double D, std::fstream *infile);
+void wiener(int N, double tmax, double dt, double Exy, double D, std::fstream *pos, std::fstream *stat);
 
 #endif
