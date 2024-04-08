@@ -1,7 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<vector>
-#include<cmath>
+#include "particle_translation.h"
 
 
 using namespace std;
