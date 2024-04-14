@@ -38,7 +38,7 @@ void wiener(int N, double tmax, double dt, double D, std::fstream *pos, std::fst
             pos_arr[0][i] += dx;
             pos_arr[1][i] += dy;
 
-            stat_values_x[0] = stat_values_x[0] + pos_arr[0][i]/N; // X mean
+            stat_values_x[0] += pos_arr[0][i]/N; // X mean
             stat_values_x[1] += pow(pos_arr[0][i],2)/N; // X second moment
             
             stat_values_y[0] += pos_arr[1][i]/N; // Y mean
@@ -52,17 +52,17 @@ void wiener(int N, double tmax, double dt, double D, std::fstream *pos, std::fst
         stat_values_y[2] = (stat_values_y[1] - pow(stat_values_y[0],2))/(2.*(t+dt)); // D_YY
         stat_values_xy[2] = (stat_values_xy[1] - stat_values_xy[0])/(2.*(t+dt)); // D_XY
 
-        stat_values_x[3] += stat_values_x[2]/(t/dt+1); // mean D
-        stat_values_y[3] += stat_values_y[2]/(t/dt+1);
-        stat_values_xy[3] += stat_values_xy[2]/(t/dt+1);
+        stat_values_x[3] += stat_values_x[2]/(tmax/dt+1); // mean D
+        stat_values_y[3] += stat_values_y[2]/(tmax/dt+1);
+        stat_values_xy[3] += stat_values_xy[2]/(tmax/dt+1);
 
-        stat_values_x[4] += pow(stat_values_x[2],2)/(t/dt+1); // second moment D
-        stat_values_y[4] += pow(stat_values_y[2],2)/(t/dt+1);
-        stat_values_xy[4] += pow(stat_values_xy[2],2)/(t/dt+1);
+        stat_values_x[4] += pow(stat_values_x[2],2)/(tmax/dt+1); // second moment D
+        stat_values_y[4] += pow(stat_values_y[2],2)/(tmax/dt+1);
+        stat_values_xy[4] += pow(stat_values_xy[2],2)/(tmax/dt+1);
 
-        stat_values_x[5] = sqrt((stat_values_x[4] - pow(stat_values_x[3],2))/(t/dt+1)); // std D
-        stat_values_y[5] = sqrt((stat_values_y[4] - pow(stat_values_y[3],2))/(t/dt+1));
-        stat_values_xy[5] = sqrt((stat_values_xy[4] - pow(stat_values_xy[3],2))/(t/dt+1));
+        stat_values_x[5] = sqrt((stat_values_x[4] - pow(stat_values_x[3],2))/(tmax/dt+1)); // std D
+        stat_values_y[5] = sqrt((stat_values_y[4] - pow(stat_values_y[3],2))/(tmax/dt+1));
+        stat_values_xy[5] = sqrt((stat_values_xy[4] - pow(stat_values_xy[3],2))/(tmax/dt+1));
         
         *stat<<N<<" "<<t<<" "<<stat_values_x[0]<<" "<<stat_values_y[0]<<" "<<stat_values_xy[0]<<" "<<stat_values_x[2]<<" "<<stat_values_y[2]<<" "<<stat_values_xy[2]<<" "<<stat_values_x[5]<<" "<<stat_values_y[5]<<" "<<stat_values_xy[5]<<"\n";
 
@@ -130,7 +130,7 @@ void dyf_and_abs(int N, double tmax, double dt, double xs, double ys, double D, 
                     n++;
                 }
             }
-            stat_values_x[0] = stat_values_x[0] + pos_arr[0][i]/N; // X mean
+            stat_values_x[0] += pos_arr[0][i]/N; // X mean
             stat_values_x[1] += pow(pos_arr[0][i],2)/N; // X second moment
             
             stat_values_y[0] += pos_arr[1][i]/N; // Y mean

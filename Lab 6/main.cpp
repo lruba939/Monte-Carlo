@@ -6,8 +6,6 @@
 
 int main(){
 
-    srand( time( NULL ) );
-
     double dt = 0.1, tmax = 100;
     double D=1;
     double xs = 0, ys = 0;
@@ -32,9 +30,9 @@ int main(){
     // double omega[3] = {10, 50, 100};
 
     // std::fstream da_pos, da_stat;
-    // da_pos.open("omega0_Ra_0_pos.dat", std::fstream::out);
-    // da_stat.open("omega0_Ra_0_stat.dat", std::fstream::out);
-    //     dyf_and_abs(Nmax, tmax, dt, xs, ys, D, omega[0], xr, yr, Rr, xa, ya, Ra[0], &da_pos, &da_stat);
+    // da_pos.open("omega2_Ra_1_pos.dat", std::fstream::out);
+    // da_stat.open("omega2_Ra_1_stat.dat", std::fstream::out);
+    //     dyf_and_abs(Nmax, tmax, dt, xs, ys, D, omega[2], xr, yr, Rr, xa, ya, Ra[1], &da_pos, &da_stat);
     // da_pos.close();
     // da_stat.close();
 
