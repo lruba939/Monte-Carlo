@@ -7,7 +7,7 @@ double uni_rand(){
 
 void Gillespie(double k1, double k2, double k3, double k4, double x1start, double x2start, double x3start, int tmax, int N, int Pmax, std::fstream *stat, std::fstream *hist){
 
-    double h0[N], h1[N], h2[N];
+    double h0[N], h1[N], h2[N], hstd[N];
     double dt = tmax/N;
     int ncount[N];
 
@@ -15,6 +15,7 @@ void Gillespie(double k1, double k2, double k3, double k4, double x1start, doubl
         h0[i] = 0;
         h1[i] = 0;
         h2[i] = 0;
+        hstd[i] = 0;
         ncount[i] = 0;
     }
 
@@ -64,19 +65,18 @@ void Gillespie(double k1, double k2, double k3, double k4, double x1start, doubl
         }
 
         for(int i=0; i<N; i++){
-            double avg_x3 = h0[i]/ncount[i];
+            double avg_x3 = h0[i] / (double) ncount[i];
             h1[i] += avg_x3;
             h2[i] += pow(avg_x3,2);
         }
 
     }
     
-    double hstd[N];
     // HIST
     for(int i=0; i<N; i++){
-        double x3t_1 = h1[i]/Pmax;
-        double x3t_2 = h2[i]/Pmax;
-        hstd[i] = sqrt( (x3t_2 - pow(x3t_1, 2)) / Pmax );
+        double x3t_1 = h1[i] / (double) Pmax;
+        double x3t_2 = h2[i] / (double) Pmax;
+        hstd[i] = sqrt( (x3t_2 - pow(x3t_1, 2)) / (double) Pmax );
         // std::cout<<i<<"\n";
         *hist<<i*dt+dt/2<<" "<<x3t_1<<" "<<hstd[i]<<"\n";
     }

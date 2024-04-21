@@ -1,10 +1,10 @@
 #include "functions.h"
-#include "time.h"
+
 
 
 int main(){
 
-    // std::srand(time(NULL));
+    //std::srand(time(NULL));
 
     double k1, k2, k3, k4, x1start, x2start, x3start;
     int tmax, N, Pmax;
@@ -25,6 +25,17 @@ int main(){
     std::fstream stat, hist;
     stat.open("stat.dat", std::fstream::out);
     hist.open("hist.dat", std::fstream::out);
+
+        Gillespie(k1, k2, k3, k4, x1start, x2start, x3start, tmax, N, Pmax, &stat, &hist);
+
+    stat.close();
+    hist.close();
+
+
+    Pmax = 100;
+
+    stat.open("stat2.dat", std::fstream::out);
+    hist.open("hist2.dat", std::fstream::out);
 
         Gillespie(k1, k2, k3, k4, x1start, x2start, x3start, tmax, N, Pmax, &stat, &hist);
 
