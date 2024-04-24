@@ -4,12 +4,11 @@
 
 int main(){
 
-    std::fstream pos;
-    pos.open("pos.dat", std::fstream::out);
+    double V_tot;
 
+    V_tot = Brenner();
 
-    pos.close();
+    std::cout<<"Total energy: "<<V_tot<<" eV \n";
 
     return 0;
-
 }
