@@ -53,7 +53,7 @@ double cut_function(double r, double R1, double R2){
     return f_cut;
 }
 
-double B_val(std::vector<std::vector<double>>& atoms, int i, int j, double r_ij[3], double r_ij_len, double R1, double R2, double a0, double c0, double d0, double delta){
+double B_val(std::vector<std::vector<double>>& atoms, int i, int j, double r_ij[3], double r_ij_len, double R1, double R2, double a0, double c0, double d0, double delta, bool correction){
     double B_ij = 0;
     double B_ji = 0;
     double ksi_ij = 0;
@@ -73,8 +73,12 @@ double B_val(std::vector<std::vector<double>>& atoms, int i, int j, double r_ij[
                 double s_prod_ijk = (double) r_ij[0]*r_ik[0] + r_ij[1]*r_ik[1] + r_ij[2]*r_ik[2];
                 double len_ijk = (double) r_ij_len * r_ik_len;
                 double kosinus = (s_prod_ijk/len_ijk);
-                double g_function = a0*( 1 + pow(c0,2)/pow(d0,2) - pow(c0,2)/( pow(d0,2) + pow(1 + kosinus, 2) ) );
-                ksi_ij += f_cut_ik*g_function;
+                if(correction == true && kosinus > 0){
+                    ksi_ji += 10;
+                }else{
+                    double g_function = a0*( 1 + pow(c0,2)/pow(d0,2) - pow(c0,2)/( pow(d0,2) + pow(1 + kosinus, 2) ) );
+                    ksi_ij += f_cut_ik*g_function;
+                }
             }
 
             double r_jk[3] = {atoms[k][3] - atoms[j][3], atoms[k][4] - atoms[j][4], atoms[k][5] - atoms[j][5]};
@@ -87,8 +91,12 @@ double B_val(std::vector<std::vector<double>>& atoms, int i, int j, double r_ij[
                 double s_prod_ijk = (double) r_ji[0]*r_jk[0] + r_ji[1]*r_jk[1] + r_ji[2]*r_jk[2];
                 double len_ijk = (double) r_ij_len * r_jk_len;
                 double kosinus = (s_prod_ijk/len_ijk);
-                double g_function = a0*( 1 + pow(c0,2)/pow(d0,2) - pow(c0,2)/( pow(d0,2) + pow(1 + kosinus, 2) ) );
-                ksi_ji += f_cut_jk*g_function;
+                if(correction == true && kosinus > 0){
+                    ksi_ji += 10;
+                }else{
+                    double g_function = a0*( 1 + pow(c0,2)/pow(d0,2) - pow(c0,2)/( pow(d0,2) + pow(1 + kosinus, 2) ) );
+                    ksi_ji += f_cut_jk*g_function;
+                }
             }
 
         }
@@ -102,7 +110,7 @@ double B_val(std::vector<std::vector<double>>& atoms, int i, int j, double r_ij[
     return B;
 }
 
-double Brenner_i_energy(std::vector<std::vector<double>>& atoms, int i){
+double Brenner_i_energy(std::vector<std::vector<double>>& atoms, int i, bool correction){
 
     double R0, R1, R2, De, S, lambda, delta, a0, c0, d0;
 
@@ -145,7 +153,7 @@ double Brenner_i_energy(std::vector<std::vector<double>>& atoms, int i){
 
             // czynnik skalujacy potencjal przyciagania
 
-            double B = B_val(atoms, i, j, r_ij, r_ij_len, R1, R2, a0, c0, d0, delta);
+            double B = B_val(atoms, i, j, r_ij, r_ij_len, R1, R2, a0, c0, d0, delta, correction);
 
             Vi += (double) f_cut_ij*( VR - B*VA );
         }
@@ -153,11 +161,10 @@ double Brenner_i_energy(std::vector<std::vector<double>>& atoms, int i){
     return Vi;
 }
 
-std::vector<double> pair_correlation_function(std::vector<std::vector<double>>& atoms, int M){
+std::vector<double> pair_correlation_function(std::vector<std::vector<double>>& atoms, int M, double& r_mean){
 
     int atoms_num = atoms.size();
 
-    double r_mean = 0;
     for(int i = 0; i < atoms_num; i++){
         double r_i = sqrt(pow(atoms[i][3],2) + pow(atoms[i][4],2) + pow(atoms[i][5],2));
         r_mean += (double) r_i/atoms_num;
@@ -201,9 +208,9 @@ void rand_atoms_pos(std::vector<std::vector<double>>& atoms, const int n, double
     }
 }
 
-void atom_pos_change(std::vector<std::vector<double>>& atoms, int i, double beta, double w_r, double w_phi, double w_theta){
+void atom_pos_change(std::vector<std::vector<double>>& atoms, int i, double beta, double w_r, double w_phi, double w_theta, bool correction){
     
-    double V_old = Brenner_i_energy(atoms, i);
+    double V_old = Brenner_i_energy(atoms, i, correction);
     
     double U_r = uni_rand();
     double U_phi = uni_rand();
@@ -241,7 +248,7 @@ void atom_pos_change(std::vector<std::vector<double>>& atoms, int i, double beta
 
     rad_to_xyz(atoms, i);
     
-    double V_new = Brenner_i_energy(atoms, i);
+    double V_new = Brenner_i_energy(atoms, i, correction);
 
     double p_acc = std::min(1.0, exp((-1.0)*beta*(V_new - V_old)));
     double U_acc = uni_rand();
@@ -254,11 +261,11 @@ void atom_pos_change(std::vector<std::vector<double>>& atoms, int i, double beta
     }
 }
 
-void atoms_global_pos_change(std::vector<std::vector<double>>& atoms , const int n, double beta, double W_all, double& V_tot){
+void atoms_global_pos_change(std::vector<std::vector<double>>& atoms , const int n, double beta, double W_all, double& V_tot, bool correction){
     
     double V_old = 0;
     for(int i=0; i<n; i++){
-        V_old += Brenner_i_energy(atoms, i)/2.0;
+        V_old += Brenner_i_energy(atoms, i, correction)/2.0;
     }
 
     double U_r = uni_rand();
@@ -271,7 +278,7 @@ void atoms_global_pos_change(std::vector<std::vector<double>>& atoms , const int
 
     double V_new = 0;
     for(int i=0; i<n; i++){
-        V_new += Brenner_i_energy(atoms, i)/2.0;
+        V_new += Brenner_i_energy(atoms, i, correction)/2.0;
     }
 
     double p_acc = std::min(1.0, exp((-1.0)*beta*(V_new - V_old)));
@@ -305,49 +312,54 @@ double beta_parameter(int it, int it_max, double beta_min, double beta_max, doub
     return beta;
 }
 
-void SA(const int n, const int it_max, int M, double w_r, double w_phi, double w_theta, double W_all, double r_start, double beta_min, double beta_max, double p, std::ofstream *energyInFile, std::ofstream *posInFile, std::ofstream *pcfInFile, std::ofstream *avogadroInFile){
+double SA(const int n, const int it_max, int M, double w_r, double w_phi, double w_theta, double W_all, double r_start, double beta_min, double beta_max, double p,
+        bool correction, std::ofstream *energyInFile=nullptr, std::ofstream *posInFile=nullptr, std::ofstream *pcfInFile=nullptr, std::ofstream *avogadroInFile=nullptr){
 
     std::vector<std::vector<double>> atoms;
 
     rand_atoms_pos(atoms, n, r_start);
 
+    double V_tot;
     int atoms_num = atoms.size();
     double beta = 0;
     for(int it = 1; it <= it_max; it++){
         // std::cout<<"Iteracja: "<<it<<"\n";
 
-        double V_tot = 0;
+        V_tot = 0;
 
         beta = beta_parameter(it, it_max, beta_min, beta_max, p);
 
         for(int i = 0; i < n; i++){
-            atom_pos_change(atoms, i, beta, w_r, w_phi, w_theta);
+            atom_pos_change(atoms, i, beta, w_r, w_phi, w_theta, correction);
         }
         
-        atoms_global_pos_change(atoms, n, beta, W_all, V_tot);
+        atoms_global_pos_change(atoms, n, beta, W_all, V_tot, correction);
 
         if(it%100 == 0){
-            // std::cout<<"Iteracja: "<<it<<"  Energia: "<<V_tot<<" eV\n";
-            *energyInFile << it << " " << V_tot << "\n";
+            if(energyInFile != nullptr){
+                double r_mean = 0;
+                std::vector<double> pcf = pair_correlation_function(atoms, M, r_mean);
+                std::ostream_iterator<double> output_pcf(*pcfInFile, "\n");
+                std::copy(std::begin(pcf), std::end(pcf), output_pcf);
 
-            std::ostream_iterator<double> output_pos(*posInFile, " ");
-            for(const auto& vt : atoms) {
-                std::copy(vt.cbegin(), vt.cend(), output_pos);
-                *posInFile << "\n";
-            }
+                // std::cout<<"Iteracja: "<<it<<"  Energia: "<<V_tot<<" eV\n";
+                *energyInFile << it << " "<< beta << " " << V_tot << " " <<r_mean << "\n";
 
-            std::vector<double> pcf = pair_correlation_function(atoms, M);
-            std::ostream_iterator<double> output_pcf(*pcfInFile, "\n");
-            std::copy(std::begin(pcf), std::end(pcf), output_pcf);
+                std::ostream_iterator<double> output_pos(*posInFile, " ");
+                for(const auto& vt : atoms) {
+                    std::copy(vt.cbegin(), vt.cend(), output_pos);
+                    *posInFile << "\n";
+                }
 
-            if(it == it_max){
-                std::cout<<"Iteracja: "<<it<<"  Energia: "<<V_tot<<" eV\n";
-                *avogadroInFile << n <<"\n\n";
-                for(int i=0; i<n; i++){
-                    *avogadroInFile << "C " << atoms[i][3] << " " << atoms[i][4] << " " << atoms[i][5] << "\n";
+                if(it == it_max){
+                    std::cout<<"Iteracja: "<<it<<"  Energia: "<<V_tot<<" eV\n";
+                    *avogadroInFile << n <<"\n\n";
+                    for(int i=0; i<n; i++){
+                        *avogadroInFile << "C " << atoms[i][3] << " " << atoms[i][4] << " " << atoms[i][5] << "\n";
+                    }
                 }
             }
-
         }
     }
+    return V_tot;
 }

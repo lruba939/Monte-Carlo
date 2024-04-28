@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.spatial.distance import pdist, squareform
 
-data = np.loadtxt("data.dat", dtype=float, delimiter=" ")
+data = np.loadtxt("zad5.dat", dtype=float, delimiter=" ")
 print(data)
 
 X = data[:,0]
