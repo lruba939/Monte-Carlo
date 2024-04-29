@@ -77,34 +77,34 @@ int main(){
     // avogadroInFile.close();
 
     // Zadanie piąte
-    correction = true;
-    r_start = 2.5;
-
-    energyInFile.open("atoms_energy_zad5.dat");
-    posInFile.open("atoms_pos_zad5.dat");
-    pcfInFile.open("pcf_zad5.dat");
-    avogadroInFile.open("atoms_avogadro_zad5.xyz");
-
-    SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-        beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
-
-    energyInFile.close();
-    posInFile.close();
-    pcfInFile.close();
-    avogadroInFile.close();
-
-    // // Zadanie siódme
     // correction = true;
     // r_start = 2.5;
+
+    // energyInFile.open("atoms_energy_zad5.dat");
+    // posInFile.open("atoms_pos_zad5.dat");
+    // pcfInFile.open("pcf_zad5.dat");
+    // avogadroInFile.open("atoms_avogadro_zad5.xyz");
+
+    // SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //     beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+
+    // energyInFile.close();
+    // posInFile.close();
+    // pcfInFile.close();
+    // avogadroInFile.close();
+
+    // // Zadanie siódme
+    correction = true;
+    r_start = 2.5;
     
-    // std::ofstream energy;
-    // energy.open("atoms_energy_n_zad7.dat");
-    // for(int n = 30; n <= 60; n++){
-    //     V_tot = SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
-    //     energy << n << " "<< V_tot << "\n";
-    // }
-    // energy.close();
+    std::ofstream energy;
+    energy.open("atoms_energy_n_zad7.dat");
+    for(int n = 20; n <= 100; n++){
+        V_tot = SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+        energy << n << " "<< V_tot << "\n";
+    }
+    energy.close();
 
 
     time(&end);
