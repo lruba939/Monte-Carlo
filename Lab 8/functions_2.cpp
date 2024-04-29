@@ -350,7 +350,8 @@ double SA(const int n, const int it_max, int M, double w_r, double w_phi, double
                     std::copy(vt.cbegin(), vt.cend(), output_pos);
                     *posInFile << "\n";
                 }
-
+            }
+            if(avogadroInFile != nullptr){
                 if(it == it_max){
                     std::cout<<"Iteracja: "<<it<<"  Energia: "<<V_tot<<" eV\n";
                     *avogadroInFile << n <<"\n\n";

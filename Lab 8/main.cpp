@@ -96,13 +96,23 @@ int main(){
     // // Zadanie siódme
     correction = true;
     r_start = 2.5;
-    
+    int n_start = 20;
+    int n_stop = 100;
+
+    std::vector<std::string> fileNames;
+    for(int n = n_start; n <= n_stop; n++){
+        fileNames.push_back("atoms_avogadro_n_" + std::to_string(n) + ".xyz");
+        // std::cout<<fileNames[n-n_start]<<"\n";
+    }  
+
     std::ofstream energy;
     energy.open("atoms_energy_n_zad7.dat");
-    for(int n = 20; n <= 100; n++){
+    for(int n = n_start; n <= n_stop; n++){
+        avogadroInFile.open(fileNames[n-n_start]);
         V_tot = SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
             beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
         energy << n << " "<< V_tot << "\n";
+        avogadroInFile.close();
     }
     energy.close();
 
