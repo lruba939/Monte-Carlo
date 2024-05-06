@@ -111,7 +111,7 @@ void relaksacja(const int n_x, const int n_y, double Delta, double epsilon, doub
 }
 
 void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n_length_max, double epsilon, 
-                double rho_max, double sigma_p, double V_L, double V_T, double V_B){
+                double rho_max, double sigma_p, double V_L, double V_T, double V_B, int B_condition){
     
     std::vector<std::vector<double>> V(n_y + 1, std::vector<double>(n_x + 1));
     std::vector<std::vector<double>> rho(n_y + 1, std::vector<double>(n_x + 1));
@@ -187,7 +187,7 @@ void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n
             double V_2 = sum_V_2/chains;
             V[j_0][i_0] = V_1;
             sigma_V[j_0][i_0] = sqrt((V_2 - pow(V_1,2))/chains);
-            B[j_0][i_0] = 0;
+            B[j_0][i_0] = B_condition;
             S[j_0][i_0] = (double) chains/N_chains_max;
         }
     }
