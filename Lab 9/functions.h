@@ -26,7 +26,7 @@ void relaksacja(const int n_x, const int n_y, double Delta, double epsilon, doub
                 double V_T, double V_B);
 
 void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n_length_max, double epsilon, 
-                double rho_max, double sigma_p, double V_L, double V_T, double V_B, int B_condition);
+                double rho_max, double sigma_p, double V_L, double V_T, double V_B, int B_condition, std::string sym_number);
 
 
 

@@ -111,7 +111,7 @@ void relaksacja(const int n_x, const int n_y, double Delta, double epsilon, doub
 }
 
 void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n_length_max, double epsilon, 
-                double rho_max, double sigma_p, double V_L, double V_T, double V_B, int B_condition){
+                double rho_max, double sigma_p, double V_L, double V_T, double V_B, int B_condition, std::string sym_number){
     
     std::vector<std::vector<double>> V(n_y + 1, std::vector<double>(n_x + 1));
     std::vector<std::vector<double>> rho(n_y + 1, std::vector<double>(n_x + 1));
@@ -191,7 +191,12 @@ void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n
             S[j_0][i_0] = (double) chains/N_chains_max;
         }
     }
-    save_data("V_MC.dat", V);
-    save_data("sigma_MC.dat", sigma_V);
-    save_data("S_MC.dat", S);
+
+    std::string V_file = "V_MC_" + sym_number + ".dat";
+    std::string sigma_file = "sigma_MC_" + sym_number + ".dat";
+    std::string S_file = "S_MC_" + sym_number + ".dat";
+
+    save_data(V_file, V);
+    save_data(sigma_file, sigma_V);
+    save_data(S_file, S);
 }

@@ -27,10 +27,25 @@ int main(){
     relaksacja(n_x, n_y, Delta, epsilon, omega, tol, it_max, rho_max, sigma_p, V_L, V_T, V_B);
 
     //////////////////////////
-    int N_chains_max = 300;
-    double n_length_max = 300;
-    int B_condition = 1;
-    MC_V(n_x, n_y, Delta, N_chains_max, n_length_max, epsilon, rho_max, sigma_p, V_L, V_T, V_B, B_condition);
+    int N_chains_max = 100;
+    double n_length_max = 100;
+    int B_condition = 0;
+    std::string zadanie = "1";
+    MC_V(n_x, n_y, Delta, N_chains_max, n_length_max, epsilon, rho_max, sigma_p, V_L, V_T, V_B, B_condition, zadanie);
+
+    //////////////////////////
+    N_chains_max = 100;
+    n_length_max = 100;
+    B_condition = 1;
+    zadanie = "2";
+    MC_V(n_x, n_y, Delta, N_chains_max, n_length_max, epsilon, rho_max, sigma_p, V_L, V_T, V_B, B_condition, zadanie);
+
+    //////////////////////////
+    N_chains_max = 300;
+    n_length_max = 300;
+    B_condition = 1;
+    zadanie = "3";
+    MC_V(n_x, n_y, Delta, N_chains_max, n_length_max, epsilon, rho_max, sigma_p, V_L, V_T, V_B, B_condition, zadanie);
 
     time(&end);
     double time_taken = double(end - start); 
