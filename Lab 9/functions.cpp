@@ -182,7 +182,7 @@ void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n
 
                     g += rho[j][i]*pow(Delta,2)/(4.0*epsilon);
                 }
-            }
+            }       
             double V_1 = sum_V/chains;
             double V_2 = sum_V_2/chains;
             V[j_0][i_0] = V_1;
@@ -190,6 +190,10 @@ void MC_V(const int n_x, const int n_y, double Delta, int N_chains_max, double n
             B[j_0][i_0] = B_condition;
             S[j_0][i_0] = (double) chains/N_chains_max;
         }
+    }
+
+    for(int j=1; j < n_y; j++){
+        V[j][n_x] = V[j][n_x-1];
     }
 
     std::string V_file = "V_MC_" + sym_number + ".dat";
