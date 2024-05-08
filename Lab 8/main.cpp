@@ -77,21 +77,21 @@ int main(){
     // avogadroInFile.close();
 
     // Zadanie piąte
-    // correction = true;
-    // r_start = 2.5;
+    correction = true;
+    r_start = 2.5;
 
-    // energyInFile.open("atoms_energy_zad5.dat");
-    // posInFile.open("atoms_pos_zad5.dat");
-    // pcfInFile.open("pcf_zad5.dat");
-    // avogadroInFile.open("atoms_avogadro_zad5.xyz");
+    energyInFile.open("atoms_energy_zad5.dat");
+    posInFile.open("atoms_pos_zad5.dat");
+    pcfInFile.open("pcf_zad5.dat");
+    avogadroInFile.open("atoms_avogadro_zad5.xyz");
 
-    // SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-    //     beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+        beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-    // energyInFile.close();
-    // posInFile.close();
-    // pcfInFile.close();
-    // avogadroInFile.close();
+    energyInFile.close();
+    posInFile.close();
+    pcfInFile.close();
+    avogadroInFile.close();
 
     // // Zadanie siódme
     // correction = true;
@@ -117,274 +117,274 @@ int main(){
     // energy.close();
 
     // Zadanie szóste
-    r_start = 2.5;
-    correction = true;
+    // r_start = 2.5;
+    // correction = true;
 
-    for(int i = 1; i<=5; i++){
-    w_r = pow(10.0,-4);
-    w_phi = pow(10.0,-2)*5;
-    w_theta = pow(10.0,-2)*5;
-    beta_min = 1.0;
-    beta_max = 100.0;
-    p = 5.0;
-    std::string energyName = "atoms_energy_zad6_1_" + std::to_string(i) + ".dat";
-    std::string posName = "atoms_pos_zad6_1_" + std::to_string(i) + ".dat";
-    std::string pcfName = "pcf_zad6_1_" + std::to_string(i) + ".dat";
-    std::string avoName = "atoms_avogadro_zad6_1_" + std::to_string(i) + ".dat";
+    // for(int i = 1; i<=5; i++){
+    // w_r = pow(10.0,-4);
+    // w_phi = pow(10.0,-2)*5;
+    // w_theta = pow(10.0,-2)*5;
+    // beta_min = 1.0;
+    // beta_max = 100.0;
+    // p = 5.0;
+    // std::string energyName = "atoms_energy_zad6_1_" + std::to_string(i) + ".dat";
+    // std::string posName = "atoms_pos_zad6_1_" + std::to_string(i) + ".dat";
+    // std::string pcfName = "pcf_zad6_1_" + std::to_string(i) + ".dat";
+    // std::string avoName = "atoms_avogadro_zad6_1_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4);
-    w_phi = pow(10.0,-2)*5;
-    w_theta = pow(10.0,-2)*5;
-    beta_min = 20.0;
-    beta_max = 80.0;
-    p = 2.5;
-    energyName = "atoms_energy_zad6_2_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_2_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_2_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_2_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4);
+    // w_phi = pow(10.0,-2)*5;
+    // w_theta = pow(10.0,-2)*5;
+    // beta_min = 20.0;
+    // beta_max = 80.0;
+    // p = 2.5;
+    // energyName = "atoms_energy_zad6_2_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_2_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_2_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_2_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*5;
-    w_phi = pow(10.0,-2)*2;
-    w_theta = pow(10.0,-2)*2;
-    beta_min = 1.0;
-    beta_max = 100.0;
-    p = 2.0;
-    energyName = "atoms_energy_zad6_3_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_3_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_3_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_3_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*5;
+    // w_phi = pow(10.0,-2)*2;
+    // w_theta = pow(10.0,-2)*2;
+    // beta_min = 1.0;
+    // beta_max = 100.0;
+    // p = 2.0;
+    // energyName = "atoms_energy_zad6_3_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_3_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_3_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_3_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*5;
-    w_phi = pow(10.0,-2)*8;
-    w_theta = pow(10.0,-2)*8;
-    beta_min = 30.0;
-    beta_max = 100.0;
-    p = 1;
-    energyName = "atoms_energy_zad6_4_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_4_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_4_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_4_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*5;
+    // w_phi = pow(10.0,-2)*8;
+    // w_theta = pow(10.0,-2)*8;
+    // beta_min = 30.0;
+    // beta_max = 100.0;
+    // p = 1;
+    // energyName = "atoms_energy_zad6_4_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_4_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_4_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_4_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-5);
-    w_phi = pow(10.0,-2)*5;
-    w_theta = pow(10.0,-2)*5;
-    beta_min = 1.0;
-    beta_max = 10.0;
-    p = 5.0;
-    energyName = "atoms_energy_zad6_5_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_5_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_5_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_5_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-5);
+    // w_phi = pow(10.0,-2)*5;
+    // w_theta = pow(10.0,-2)*5;
+    // beta_min = 1.0;
+    // beta_max = 10.0;
+    // p = 5.0;
+    // energyName = "atoms_energy_zad6_5_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_5_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_5_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_5_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*5;
-    w_phi = pow(10.0,-2)*25;
-    w_theta = pow(10.0,-2)*25;
-    beta_min = 1.0;
-    beta_max = 100.0;
-    p = 2.0;
-    energyName = "atoms_energy_zad6_6_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_6_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_6_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_6_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*5;
+    // w_phi = pow(10.0,-2)*25;
+    // w_theta = pow(10.0,-2)*25;
+    // beta_min = 1.0;
+    // beta_max = 100.0;
+    // p = 2.0;
+    // energyName = "atoms_energy_zad6_6_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_6_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_6_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_6_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*2;
-    w_phi = pow(10.0,-2)*10;
-    w_theta = pow(10.0,-2)*10;
-    beta_min = 25.0;
-    beta_max = 75.0;
-    p = 1.3;
-    energyName = "atoms_energy_zad6_7_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_7_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_7_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_7_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*2;
+    // w_phi = pow(10.0,-2)*10;
+    // w_theta = pow(10.0,-2)*10;
+    // beta_min = 25.0;
+    // beta_max = 75.0;
+    // p = 1.3;
+    // energyName = "atoms_energy_zad6_7_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_7_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_7_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_7_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*1.8;
-    w_phi = pow(10.0,-2)*5.4;
-    w_theta = pow(10.0,-2)*5.4;
-    beta_min = 1.0;
-    beta_max = 125.0;
-    p = 2.2;
-    energyName = "atoms_energy_zad6_8_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_8_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_8_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_8_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*1.8;
+    // w_phi = pow(10.0,-2)*5.4;
+    // w_theta = pow(10.0,-2)*5.4;
+    // beta_min = 1.0;
+    // beta_max = 125.0;
+    // p = 2.2;
+    // energyName = "atoms_energy_zad6_8_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_8_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_8_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_8_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*1.8;
-    w_phi = pow(10.0,-2)*5.4;
-    w_theta = pow(10.0,-2)*5.4;
-    beta_min = 1.0;
-    beta_max = 200.0;
-    p = 2.5;
-    energyName = "atoms_energy_zad6_9_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_9_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_9_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_9_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*1.8;
+    // w_phi = pow(10.0,-2)*5.4;
+    // w_theta = pow(10.0,-2)*5.4;
+    // beta_min = 1.0;
+    // beta_max = 200.0;
+    // p = 2.5;
+    // energyName = "atoms_energy_zad6_9_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_9_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_9_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_9_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4);
-    w_phi = pow(10.0,-2)*5;
-    w_theta = pow(10.0,-2)*5;
-    beta_min = 1.0;
-    beta_max = 100.0;
-    p = 2.0;
-    energyName = "atoms_energy_zad6_10_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_10_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_10_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_10_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4);
+    // w_phi = pow(10.0,-2)*5;
+    // w_theta = pow(10.0,-2)*5;
+    // beta_min = 1.0;
+    // beta_max = 100.0;
+    // p = 2.0;
+    // energyName = "atoms_energy_zad6_10_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_10_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_10_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_10_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
 
-    w_r = pow(10.0,-4)*0.5;
-    w_phi = pow(10.0,-2)*0.25;
-    w_theta = pow(10.0,-2)*0.25;
-    beta_min = 1.0;
-    beta_max = 100.0;
-    p = 2.0;
-    energyName = "atoms_energy_zad6_11_" + std::to_string(i) + ".dat";
-    posName = "atoms_pos_zad6_11_" + std::to_string(i) + ".dat";
-    pcfName = "pcf_zad6_11_" + std::to_string(i) + ".dat";
-    avoName = "atoms_avogadro_zad6_11_" + std::to_string(i) + ".dat";
+    // w_r = pow(10.0,-4)*0.5;
+    // w_phi = pow(10.0,-2)*0.25;
+    // w_theta = pow(10.0,-2)*0.25;
+    // beta_min = 1.0;
+    // beta_max = 100.0;
+    // p = 2.0;
+    // energyName = "atoms_energy_zad6_11_" + std::to_string(i) + ".dat";
+    // posName = "atoms_pos_zad6_11_" + std::to_string(i) + ".dat";
+    // pcfName = "pcf_zad6_11_" + std::to_string(i) + ".dat";
+    // avoName = "atoms_avogadro_zad6_11_" + std::to_string(i) + ".dat";
 
-        energyInFile.open(energyName);
-        posInFile.open(posName);
-        pcfInFile.open(pcfName);
-        avogadroInFile.open(avoName);
+    //     energyInFile.open(energyName);
+    //     posInFile.open(posName);
+    //     pcfInFile.open(pcfName);
+    //     avogadroInFile.open(avoName);
 
-        SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
-            beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
+    //     SA(n, it_max, M, w_r, w_phi, w_theta, W_all, r_start,
+    //         beta_min, beta_max, p, correction, &energyInFile, &posInFile, &pcfInFile, &avogadroInFile);
 
-        energyInFile.close();
-        posInFile.close();
-        pcfInFile.close();
-        avogadroInFile.close();
-    }
+    //     energyInFile.close();
+    //     posInFile.close();
+    //     pcfInFile.close();
+    //     avogadroInFile.close();
+    // }
 
     time(&end);
     double time_taken = double(end - start); 
