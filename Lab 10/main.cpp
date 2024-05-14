@@ -30,28 +30,33 @@ int main(){
     std::vector<double> row;
     row.resize(3,0);
 
-    int npaths = pow(10,3);
-    double t = 22. * pow(10,-9);
-    double uxt = 0;
-    double uxt_theo = 0;
-
     double delta = 0.01;
-    double x = 0;
-    for(int i=0; i<=l/delta; i++){
-        uxt = MC_line(npaths, x, t, c, lambda, mu, zeta,
-                      Gamma_g, Gamma_l, l);
-        uxt_theo = u_xt_exact(x, t, 7.5*pow(10,-9), 1*pow(10,9), 0.75*pow(10,-9), R, G, L, C, R_g, R_l, l, 1000, 100);
+    double times[5] = {10., 15., 25., 35., 50.};
 
-        row[0] = x;
-        row[1] = uxt;
-        row[2] = uxt_theo;
-        line.push_back(row);
-        std::cout<<"x = "<<x<<"\n";
-        x = x + delta;
+    for(int i_paths = 3; i_paths <=5; i_paths++){
+        int npaths = pow(10,i_paths);
+        for(int i_t = 0; i_t < 5; i_t++){
+            double x = 0;
+            double t = times[i_t] * pow(10,-9);
+            double uxt = 0;
+            double uxt_theo = 0;
+
+            for(int i=0; i<=l/delta; i++){
+                uxt = MC_line(npaths, x, t, c, lambda, mu, zeta,
+                            Gamma_g, Gamma_l, l);
+                uxt_theo = u_xt_exact(x, t, 7.5*pow(10,-9), 1*pow(10,9), 0.75*pow(10,-9), R, G, L, C, R_g, R_l, l, 1000, 100);
+
+                row[0] = x;
+                row[1] = uxt;
+                row[2] = uxt_theo;
+                line.push_back(row);
+                x = x + delta;
+            }
+            std::string name = "t" + to_string(int(times[i_t])) + "_npaths10e" + to_string(i_paths) + ".dat";
+            save_data(name, line);
+            line.clear();
+        }
     }
-
-    save_data("test.dat", line);
-
 
     time(&end);
     double time_taken = double(end - start); 
