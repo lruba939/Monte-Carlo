@@ -1,5 +1,6 @@
 #include "DSMC_2D.h"
 
+#define M_PI 3.14159265358979323846
 //=========================================================================================
 // definicje funkcji
 //=========================================================================================
@@ -97,11 +98,49 @@ void DSMC_2D::evolution(double time_max,int nit){
 		
 		hist_velocity_all("hist3.dat",5.0,50);
 		
-		
-		if((it%10) ==0)
+		if((it)==1)
+		{
+			std::string nazwa_rv = katalog+string("/rv_")+to_string(it)+string(".dat");
+			write_position_velocity (nazwa_rv.c_str());
+			std::string nazwa_hist = katalog+string("/hist_")+to_string(it)+string(".dat");
+			hist_velocity_all(nazwa_hist.c_str(),5.0,50);
+		}
+		if((it)==5)
+		{
+			std::string nazwa_rv = katalog+string("/rv_")+to_string(it)+string(".dat");
+			write_position_velocity (nazwa_rv.c_str());
+		}
+		if((it)==10)
+		{
+			std::string nazwa_rv = katalog+string("/rv_")+to_string(it)+string(".dat");
+			write_position_velocity (nazwa_rv.c_str());
+		}
+		if((it)==25)
+		{
+			std::string nazwa_rv = katalog+string("/rv_")+to_string(it)+string(".dat");
+			write_position_velocity (nazwa_rv.c_str());
+		}
+		if((it)==50)
+		{
+			std::string nazwa_rv = katalog+string("/rv_")+to_string(it)+string(".dat");
+			write_position_velocity (nazwa_rv.c_str());
+			std::string nazwa_hist = katalog+string("/hist_")+to_string(it)+string(".dat");
+			hist_velocity_all(nazwa_hist.c_str(),5.0,50);
+		}
+		if((it%100) ==0)
 		{	
 			nazwa=katalog+string("/nptv_")+to_string(it)+string(".dat");
 			write_nptv(nazwa.c_str(),3);
+			std::string nazwa_rv = katalog+string("/rv_")+to_string(it)+string(".dat");
+			write_position_velocity (nazwa_rv.c_str());
+			if(it==1000){
+				std::string nazwa_hist = katalog+string("/hist_")+to_string(it)+string(".dat");
+				hist_velocity_all(nazwa_hist.c_str(),5.0,50);
+			}
+			if(it==10000){
+				std::string nazwa_hist = katalog+string("/hist_")+to_string(it)+string(".dat");
+				hist_velocity_all(nazwa_hist.c_str(),5.0,50);
+			}
 		}
 		mean_free_path();
 		autocorrelation();
