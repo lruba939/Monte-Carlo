@@ -9,7 +9,7 @@ int main(){
     time_t start, end;
     time(&start);
 
-    DSMC_2D ob ;
+    DSMC_2D ob;
     ob.read("i.dat"); // wczytujemy dane zpliku wejściowego
     ob.init(); // automatyczna inicjalizacja położeń i prędkości
     ob.write_position_velocity ("rv.dat"); // zapis ustawień początkowych
