@@ -10,7 +10,7 @@ int main(){
     time(&start);
 
 
-    double a = 1.0, c = 0.0, r = 0.1, dr = 0.1, N = pow(10,7);
+    double a = 1.0, c = 0.0, r = 0.1, dr = 0.1, N = pow(10,6);
 
     std::vector<std::vector<double>> histogram_data;
     histogram_data.push_back(histogram(N, dr, r, a, c));
@@ -22,6 +22,7 @@ int main(){
     std::vector<std::vector<double>> map_en, map_std;
     std::vector<double> row_en, row_std, con;
 
+    r = 0.1;
     c = c_stop;
     while(c >= c_start){
         a = a_start;

@@ -10,14 +10,14 @@ double wav_f(double r, double a, double c){
 
 double e_loc(double r, double a, double c){
     double e = 0;
-    e = (-a*a*c*r*r + (-a*a + 4*a*c - 2*c)*r + 2*a - 2*c -2) / (2*c*r*r + 2*r);
+    e = (-pow(a,2)*c*pow(r,2) + (-pow(a,2) + 4*a*c - 2*c)*r + 2*a - 2*c - 2) / (2*c*pow(r,2) + 2*r);
 
     return e;
 }
 
 double p_acc_fun(double r_i, double r_new, double a, double c){
     double p = 0;
-    p = pow(r_new/r_i, 2) * pow(fabs(wav_f(r_new, a, c))/fabs(wav_f(r_i, a, c)),2);
+    p = pow(r_new/r_i, 2) * pow(wav_f(r_new, a, c), 2) / pow(wav_f(r_i, a, c), 2);
 
     return p;
 }
@@ -27,7 +27,7 @@ std::vector<double> energy(double N, double dr, double r, double a, double c){
     r_i = r;
     std::vector<double> energy_stat(2);
     energy_stat[0] = 0; // mean
-    energy_stat[1] = 0; // second moment
+    energy_stat[1] = 0; // var
 
     for(int i=0; i<N; i++){
         double U1, U2;
@@ -41,9 +41,12 @@ std::vector<double> energy(double N, double dr, double r, double a, double c){
         }
 
         double energy = e_loc(r_i, a, c);
-        energy_stat[0] += (double) energy/N;
-        energy_stat[1] += (double) pow(energy,2)/N - pow(energy/N,2);
+        energy_stat[0] += (double) energy;
+        energy_stat[1] += (double) pow(energy,2);
     }
+
+    energy_stat[0] = energy_stat[0]/N;
+    energy_stat[1] = energy_stat[1]/N - pow(energy_stat[0]/N,2);
 
     return energy_stat;
 }
@@ -75,7 +78,7 @@ std::vector<double> histogram(double N, double dr, double r, double a, double c)
 
         if(r_i <= r_max){
             int k = (int) floor(r_i/delta_r);
-            if(k <= 200 && k >= 0){
+            if(k < 200 && k >= 0){
                 hist[k] += (double) 1/(N*delta_r);
             }
         }
