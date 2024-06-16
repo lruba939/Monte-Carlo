@@ -23,20 +23,20 @@ int main(){
     std::vector<double> row_en, row_std, con;
 
     r = 0.1;
-    c = c_stop;
-    while(c >= c_start){
-        a = a_stop;
-        while(a >= a_start){
+    c = c_start;
+    while(c <= c_stop){
+        a = a_start;
+        while(a <= a_stop){
             con = energy(N, dr, r, a, c);
             row_en.push_back(con[0]);
             row_std.push_back(sqrt(con[1]));
-            a -= da;
+            a += da;
         }
         map_en.push_back(row_en);
         map_std.push_back(row_std);
         row_en.clear();
         row_std.clear();
-        c -= dc;
+        c += dc;
     }
 
     save_data("map_en.dat", map_en);

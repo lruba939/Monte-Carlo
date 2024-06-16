@@ -37,7 +37,7 @@ std::vector<double> energy(double N, double dr, double r, double a, double c){
         double p_acc = std::min(p_acc_fun(r_i, r_new, a, c), 1.);
         
         U2 = uni_rand();
-        if(p_acc >= U2){
+        if(p_acc >= U2 && r_new > 0.){
             r_i = r_new;
         }
 
@@ -73,7 +73,7 @@ std::vector<double> histogram(double N, double dr, double r, double a, double c)
         double p_acc = std::min(p_acc_fun(r_i, r_new, a, c), 1.);
         
         U2 = uni_rand();
-        if(p_acc >= U2){
+        if(p_acc >= U2 && r_new > 0.){
             r_i = r_new;
         }
 
