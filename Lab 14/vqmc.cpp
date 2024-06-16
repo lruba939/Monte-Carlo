@@ -10,7 +10,8 @@ double wav_f(double r, double a, double c){
 
 double e_loc(double r, double a, double c){
     double e = 0;
-    e = (-pow(a,2)*c*pow(r,2) + (-pow(a,2) + 4*a*c - 2*c)*r + 2*a - 2*c - 2) / (2*c*pow(r,2) + 2*r);
+    e = (-1.*pow(a,2)*c*pow(r,2) + (-1.*pow(a,2) + 4.*a*c - 2.*c)*r + 2.*a - 2.*c - 2.) /
+                                                            (2.*c*pow(r,2) + 2.*r);
 
     return e;
 }
@@ -45,8 +46,8 @@ std::vector<double> energy(double N, double dr, double r, double a, double c){
         energy_stat[1] += (double) pow(energy,2);
     }
 
-    energy_stat[0] = energy_stat[0]/N;
     energy_stat[1] = energy_stat[1]/N - pow(energy_stat[0]/N,2);
+    energy_stat[0] = energy_stat[0]/N;
 
     return energy_stat;
 }
@@ -54,7 +55,7 @@ std::vector<double> energy(double N, double dr, double r, double a, double c){
 std::vector<double> histogram(double N, double dr, double r, double a, double c){
     int M = 200;
     double r_max = 8.0;
-    double delta_r = r_max/M;
+    double delta_r = (double) r_max/M;
     
     double r_i;
     r_i = r;
@@ -76,12 +77,14 @@ std::vector<double> histogram(double N, double dr, double r, double a, double c)
             r_i = r_new;
         }
 
-        if(r_i <= r_max){
-            int k = (int) floor(r_i/delta_r);
-            if(k < 200 && k >= 0){
-                hist[k] += (double) 1/(N*delta_r);
-            }
+        int k = (int) floor(r_i/delta_r);
+        if(k < 200 && k >= 0){
+            hist[k] += 1;
         }
+    }
+
+    for(int m = 0; m < M; m++){
+        hist[m] = (double) hist[m]/(N*delta_r);
     }
 
     return hist;

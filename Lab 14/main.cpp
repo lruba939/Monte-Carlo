@@ -4,7 +4,7 @@
 
 int main(){
 
-    srand( time( NULL ) );
+    // srand( time( NULL ) );
 
     time_t start, end;
     time(&start);
@@ -25,12 +25,12 @@ int main(){
     r = 0.1;
     c = c_stop;
     while(c >= c_start){
-        a = a_start;
-        while(a <= a_stop){
+        a = a_stop;
+        while(a >= a_start){
             con = energy(N, dr, r, a, c);
             row_en.push_back(con[0]);
             row_std.push_back(sqrt(con[1]));
-            a += da;
+            a -= da;
         }
         map_en.push_back(row_en);
         map_std.push_back(row_std);
